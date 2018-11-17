@@ -1,0 +1,92 @@
+Roz Teves
+ID: 2665530
+
+#include <iostream>
+#include <chrono>
+
+using namespace std;
+
+int GCD(long long num1, long long num2);
+
+int main()
+{
+	long long a = 0;
+	long long b = 0;
+	long int time = 0;
+	long int gcd = 0;
+	char choice;
+
+	chrono::high_resolution_clock::time_point run;
+	chrono::high_resolution_clock::time_point end;
+		
+	do
+	{
+		cout << "Enter a positive integer." << endl;
+		cin >> a;
+
+		if (a < 0)
+		{
+			cout << "\nPlease enter a positve integer." << endl;
+			cin >> a;
+			while (a < 0)
+			{
+				cout << "\nPlease enter a positve integer." << endl;
+				cin >> a;
+			}
+		}
+
+		cout << "First Integer: " << a << endl;
+		cout << "Enter a second positvie integer." << endl;
+		cin >> b;
+		
+		if (b < 0)
+		{
+			cout << "\nPlease enter a positive integer." << endl;
+			cin >> b;
+			while (b < 0)
+			{
+				cout << "\nPlease enter a positive integer." << endl;
+				cin >> b;
+			}
+		}
+
+		cout << "First Integer: " << a << endl;
+		cout << "Second Integer: " << b << "\n";
+
+		run = chrono::high_resolution_clock::now();
+		
+		if (a >= b)
+		{
+			gcd = GCD(a, b);
+		}
+		else if (b > a)
+		{
+			gcd = GCD(b, a);
+		}
+
+		end = chrono::high_resolution_clock::now();
+
+		cout << "The GCD of both numbers is " << gcd << endl;
+
+		time = chrono::duration_cast<chrono::microseconds>(end - run).count();
+
+		cout << "The total duration of the calculation is: " << time << " microseconds.\n\n";
+
+		cout << "\n\nWould you like to input more integers? y/n\n";
+		cin >> choice;
+
+	} while (choice != 'n');
+
+
+	return 0;
+}
+
+int GCD(long long num1, long long num2)
+{
+	if (num1 == 0)
+	{
+		return num2;
+	}
+
+	return GCD(num2 % num1, num1);
+}
